@@ -23,4 +23,10 @@ def convert_to_letters(numArray):
     return text
 
 
-print(convert_to_letters([1, 0, 3, 1, 20]))
+def get_intersection(array1, array2):
+    set1, set2 = set(array1), set(array2)
+    shared_values = []
+    for val in set1:
+        if val in set2:
+            shared_values.append(val)
+    return shared_values
