@@ -12,3 +12,15 @@ def convert_to_numbers(text):
     for letter in text:
         numArray.append(alphabet.index(letter))
     return numArray
+
+
+def convert_to_letters(numArray):
+    alphabet = " abcdefghijklmnopqrstuvwxyz"
+    text = ""
+    for num in numArray:
+        text += alphabet[num]
+
+    return text
+
+
+print(convert_to_letters([1, 0, 3, 1, 20]))
