@@ -30,3 +30,15 @@ def get_intersection(array1, array2):
         if val in set2:
             shared_values.append(val)
     return shared_values
+
+
+def get_union(array1, array2):  # Initally used no sets, much faster now
+    shared_values = set()
+    for num in array1:
+        if num not in shared_values:
+            shared_values.add(num)
+    for num in array2:
+        if num not in shared_values:
+            shared_values.add(num)
+    shared_values = list(shared_values)
+    return shared_values
