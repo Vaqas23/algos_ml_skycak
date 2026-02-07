@@ -20,7 +20,7 @@ def hexadecimal_to_decimal(text):
     return decimal_form
 
 
-def decimal_to_binary(text):
+def decimal_to_binary(text):  # Only works for positive values
     integer_decimal = int(text)
     binary_form = ""
     if integer_decimal == 0:
@@ -38,4 +38,20 @@ def decimal_to_binary(text):
     return binary_form
 
 
-print(decimal_to_binary("9"))
+def decimal_to_hexadecimal(text):
+
+    integer_decimal = abs(int(text))
+    hexadecimal_form = ""
+    hexadecimal_library = "0123456789ABCDEF"
+    if integer_decimal == 0:
+        return "0"
+    else:
+        while integer_decimal != 0:
+            hexadecimal_form += hexadecimal_library[integer_decimal % 16]
+            integer_decimal //= 16
+    if int(text) < 0:
+        hexadecimal_form += "-"
+
+    hexadecimal_form = hexadecimal_form[::-1]
+
+    return hexadecimal_form
