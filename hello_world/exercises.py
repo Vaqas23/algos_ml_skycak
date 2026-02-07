@@ -42,3 +42,15 @@ def get_union(array1, array2):  # Initally used no sets, much faster now
             shared_values.add(num)
     shared_values = list(shared_values)
     return shared_values
+
+
+def count_characters(text):
+    dictionary = dict()
+    text = text.lower()
+    for ch in text:
+        if ch in dictionary:
+            dictionary[ch] += 1
+        else:
+            dictionary[ch] = 1
+
+    return dictionary
