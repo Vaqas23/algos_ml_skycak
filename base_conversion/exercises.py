@@ -55,3 +55,7 @@ def decimal_to_hexadecimal(text):
     hexadecimal_form = hexadecimal_form[::-1]
 
     return hexadecimal_form
+
+
+def binary_to_hexadecimal(text):
+    return decimal_to_hexadecimal(binary_to_decimal(text))
