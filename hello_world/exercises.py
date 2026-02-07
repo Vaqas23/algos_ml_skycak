@@ -54,3 +54,13 @@ def count_characters(text):
             dictionary[ch] = 1
 
     return dictionary
+
+
+def is_prime(N):
+    for x in range(2, N//2 + 1):
+        if N % x == 0:
+            return False
+    return True
+
+
+print(is_prime(4))
