@@ -18,3 +18,24 @@ def hexadecimal_to_decimal(text):
         count += 1
 
     return decimal_form
+
+
+def decimal_to_binary(text):
+    integer_decimal = int(text)
+    binary_form = ""
+    if integer_decimal == 0:
+        return "0"
+    else:
+        while integer_decimal != 1:
+            if integer_decimal % 2 == 1:
+                binary_form += "1"
+            else:
+                binary_form += "0"
+            integer_decimal //= 2
+
+    binary_form += "1"
+    binary_form = binary_form[::-1]
+    return binary_form
+
+
+print(decimal_to_binary("9"))
