@@ -59,3 +59,10 @@ def decimal_to_hexadecimal(text):
 
 def binary_to_hexadecimal(text):
     return decimal_to_hexadecimal(binary_to_decimal(text))
+
+
+def hexadecimal_to_binary(text):
+    return decimal_to_binary(hexadecimal_to_decimal(text))
+
+
+print(hexadecimal_to_binary("7ABC82") == "11110101011110010000010")
