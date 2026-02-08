@@ -1,0 +1,21 @@
+import random
+
+# Simulates probability of getting heads a certain (num_heads) number of times
+#  when you flip a coin num_flips times. Monte Carlo method.
+
+
+def sim_probability(num_heads, num_flips):
+    num_trials = 10000000
+    successes_overrall = 0
+    for i in range(int(num_trials)):
+        successes_per_trial = 0
+        for j in range(num_flips):
+            chance = random.random()
+            if chance < 0.5:
+                successes_per_trial += 1
+        if successes_per_trial == num_heads:
+            successes_overrall += 1
+    return successes_overrall / num_trials
+
+
+print(sim_probability(1, 2))
