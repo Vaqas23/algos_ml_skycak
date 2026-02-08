@@ -4,12 +4,12 @@ import time
 # Simulates probability of getting heads a certain (num_heads) number of times
 #  when you flip a coin num_flips times. Monte Carlo method.
 
-# added computation time
+# added computation time, directly proportional increase in # trials and computation time
 
 
 def sim_probability(num_heads, num_flips):
     start_time = time.time()
-    num_trials = 10000
+    num_trials = 10_000_000
     successes_overrall = 0
     for i in range(int(num_trials)):
         successes_per_trial = 0
