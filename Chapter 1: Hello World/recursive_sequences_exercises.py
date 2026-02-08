@@ -91,3 +91,32 @@ def three_two(n):
 
 # Starting with 2, −3, generate each term by adding the product
 # of the previous two terms.
+
+
+def four_one(n):
+    sequence = [2, -3]
+    if n == 1:
+        return [2]
+    elif n == 2:
+        return sequence
+    else:
+        while len(sequence) < n:
+            previous_term1, previous_term2 = sequence[-1], sequence[-2]
+            next_term = previous_term1 + (previous_term1 * previous_term2)
+            sequence.append(next_term)
+    return sequence
+
+
+def four_two(n):
+
+    if n == 1:
+        return 2
+    elif n == 2:
+        return -3
+    else:
+        previous_term1 = four_two(n-1)
+        previous_term2 = four_two(n-2)
+        return previous_term1 + (previous_term1 * previous_term2)
+
+
+print(four_two(3), four_one(3))
