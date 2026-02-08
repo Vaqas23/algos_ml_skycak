@@ -51,15 +51,43 @@ def two_one(n):
 
 def two_two(n):
     if n == 1:
-        print(n)
         return 25
     else:
-        print(n)
         previous_term = two_two(n-1)
         if previous_term % 2 == 0:
             return previous_term // 2
         else:
             return (previous_term * 3) + 1
 
+# Starting with 0, 1, generate each term by adding the previous
+# two terms. (This is the famous Fibonacci sequence.)
 
-print(two_two(5))
+
+def three_one(n):  # give array of n terms
+    fibonacci_sequence = [0, 1]
+    if n == 1:
+        return [0]
+    elif n == 2:
+        return fibonacci_sequence
+    else:
+        while len(fibonacci_sequence) < n:
+            previous_term1, previous_term2 = fibonacci_sequence[-1], fibonacci_sequence[-2]
+            next_term = previous_term1 + previous_term2
+            fibonacci_sequence.append(next_term)
+    return fibonacci_sequence
+
+
+# give the nth term. Error was that I was treating it like an array.
+def three_two(n):
+
+    if n == 1:
+        return 0
+    elif n == 2:
+        return 1
+    else:
+        previous_term1 = three_two(n-1)
+        previous_term2 = three_two(n-2)
+        return previous_term1 + previous_term2
+
+# Starting with 2, −3, generate each term by adding the product
+# of the previous two terms.
