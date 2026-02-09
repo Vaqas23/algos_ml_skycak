@@ -1,7 +1,9 @@
 import random
+import time
 
 
 def random_draw(distribution):
+    start_time = time.time()  # begin count
     trials = 1000000
     cumulative_distribution = distribution
     return_list = [0.0] * len(distribution)
@@ -18,6 +20,11 @@ def random_draw(distribution):
     # divide all indexes by number of trials to get probability
     for i in range(len(return_list)):
         return_list[i] = return_list[i] / trials
+
+    # time taken
+    computation_time = time.time() - start_time
+    print(f"Computation time: {round(computation_time, ndigits=3)} seconds")
+
     return return_list
 
 
