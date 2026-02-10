@@ -1,7 +1,3 @@
-
-# Loop through each mini array in input
-# make a copy of a given mini array
-
 def calc_cartesian_product(ranges):
     # what we will return
     points = [
