@@ -42,3 +42,16 @@ def decode_numbers(nums, a, b):
         input_to_function.append(int(num))
 
     return convert_to_letters(input_to_function)
+
+
+def BFS_decorder(num):
+
+    for a in range(1, 101):
+        for b in range(0, 101):
+            if decode_numbers(num, a, b) != False:
+                print(f"{decode_numbers(num, a, b)},a = {a}, b = {b}")
+    return "Done"
+
+
+BFS_decorder([377, 717, 71, 513, 105, 921, 581, 547, 547, 105, 377, 717,
+             241, 71, 105, 547, 71, 377, 547, 717, 751, 683, 785, 513, 241, 547, 751])
