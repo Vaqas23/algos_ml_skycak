@@ -1,3 +1,6 @@
+import time
+
+
 def convert_to_numbers(text):
     alphabet = " abcdefghijklmnopqrstuvwxyz"
     numArray = []
@@ -45,11 +48,12 @@ def decode_numbers(nums, a, b):
 
 
 def BFS_decorder(num):
-
+    start_time = time.time()
     for a in range(1, 101):
         for b in range(0, 101):
             if decode_numbers(num, a, b) != False:
                 print(f"{decode_numbers(num, a, b)},a = {a}, b = {b}")
+    print(f"Total computation time: {time.time() - start_time}")
     return "Done"
 
 
