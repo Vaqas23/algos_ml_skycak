@@ -1,12 +1,9 @@
 def calc_cartesian_product(ranges):
-    # what we will return
     points = [
         []
     ]
 
-    # single range could refer to [a] within [[a],[1,2]]
     for single_range in ranges:
-        # build a new list of points for this range
         new_points = []
         for point in points:
             for single_item in single_range:
