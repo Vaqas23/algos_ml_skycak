@@ -1,3 +1,31 @@
+def is_hopeless(square):  # must be all ifs so they arent skipped
+    if None not in (square[0][0], square[0][1], square[0][2]):
+        if square[0][0] + square[0][1] + square[0][2] != 15:
+            return True
+    if None not in (square[1][0], square[1][1], square[1][2]):
+        if square[1][0] + square[1][1] + square[1][2] != 15:
+            return True
+    if None not in (square[2][0], square[2][1], square[2][2]):
+        if square[2][0] + square[2][1] + square[2][2] != 15:
+            return True
+    if None not in (square[0][0], square[1][0], square[2][0]):
+        if square[0][0] + square[1][0] + square[2][0] != 15:
+            return True
+    if None not in (square[0][1], square[1][1], square[2][1]):
+        if square[0][1] + square[1][1] + square[2][1] != 15:
+            return True
+    if None not in (square[0][2], square[1][2], square[2][2]):
+        if square[0][2] + square[1][2] + square[2][2] != 15:
+            return True
+    if None not in (square[0][0], square[1][1], square[2][2]):
+        if square[0][0] + square[1][1] + square[2][2] != 15:
+            return True
+    if None not in (square[0][2], square[1][1], square[2][0]):
+        if square[0][2] + square[1][1] + square[2][0] != 15:
+            return True
+        return False
+
+
 def isvalid(square):
     # All rows, columns, and both diagonals must sum to 15
     if square[0][0] + square[0][1] + square[0][2] != 15:
@@ -54,6 +82,8 @@ def brute_force_magic_squares():
                         [None, None, None],
                         [None, None, None]
                     ]
+                    if is_hopeless(square):
+                        continue
                 for num4 in digits:
                     if num4 in (num1, num2, num3):
                         continue
@@ -63,6 +93,8 @@ def brute_force_magic_squares():
                             [num4, None, None],
                             [None, None, None]
                         ]
+                        if is_hopeless(square):
+                            continue
                     for num5 in digits:
                         if num5 in (num1, num2, num3, num4):
                             continue
@@ -72,6 +104,8 @@ def brute_force_magic_squares():
                                 [num4, num5, None],
                                 [None, None, None]
                             ]
+                            if is_hopeless(square):
+                                continue
                         for num6 in digits:
                             if num6 in (num1, num2, num3, num4, num5):
                                 continue
@@ -81,6 +115,8 @@ def brute_force_magic_squares():
                                     [num4, num5, num6],
                                     [None, None, None]
                                 ]
+                                if is_hopeless(square):
+                                    continue
                             for num7 in digits:
                                 if num7 in (num1, num2, num3, num4, num5, num6):
                                     continue
@@ -90,6 +126,8 @@ def brute_force_magic_squares():
                                         [num4, num5, num6],
                                         [num7, None, None]
                                     ]
+                                    if is_hopeless(square):
+                                        continue
                                 for num8 in digits:
                                     if num8 in (num1, num2, num3, num4, num5, num6, num7):
                                         continue
@@ -99,6 +137,8 @@ def brute_force_magic_squares():
                                             [num4, num5, num6],
                                             [num7, num8, None]
                                         ]
+                                        if is_hopeless(square):
+                                            continue
                                     for num9 in digits:
                                         if num9 in (num1, num2, num3, num4, num5, num6, num7, num8):
                                             continue
@@ -108,7 +148,6 @@ def brute_force_magic_squares():
                                                 [num4, num5, num6],
                                                 [num7, num8, num9]
                                             ]
-
                                         if isvalid(square):
                                             count += 1
                                             print(
