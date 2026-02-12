@@ -111,9 +111,9 @@ def brute_force_magic_squares():
 
                                         if isvalid(square):
                                             count += 1
-                                            print(f"{count}\n")
                                             print(
                                                 f"{square[0]}\n{square[1]}\n{square[2]}\n")
+    print(f"Total: {count}")
 
 
 brute_force_magic_squares()
