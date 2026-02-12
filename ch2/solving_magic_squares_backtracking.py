@@ -21,6 +21,7 @@ def isvalid(square):
 
 
 def brute_force_magic_squares():
+    count = 0
     digits = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     square = [
         [None, None, None],
@@ -109,6 +110,8 @@ def brute_force_magic_squares():
                                             ]
 
                                         if isvalid(square):
+                                            count += 1
+                                            print(f"{count}\n")
                                             print(
                                                 f"{square[0]}\n{square[1]}\n{square[2]}\n")
 
