@@ -19,3 +19,5 @@ print(bisection(52))
 # Given how python does floats (64 bits, 15-17 significant decimals), you answer won't change after ~100, whether its 100 vs 1,000,000.
 # Ex. bisection(1000) == bisection(1000000) evaluates to true.
 # 52 trials seems to be the last trial that matters
+
+# print(bisection(7)) to get 6 decimal places of precision
