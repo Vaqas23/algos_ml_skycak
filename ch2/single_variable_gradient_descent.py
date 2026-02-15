@@ -1,5 +1,4 @@
-def minimize_first_equation(n, tolerance):
-    guess = n
+def minimize_first_equation(guess, tolerance):
     learning_rate = 0.01
 
     while True:
