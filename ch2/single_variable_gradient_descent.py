@@ -1,4 +1,4 @@
-import math
+import math  # required for third equation (includes sin/cos)
 
 
 def minimize_first_equation(guess, tolerance):  # for f(x) = x**2 + x + 1
