@@ -1,3 +1,6 @@
+import math
+
+
 def minimize_first_equation(guess, tolerance):  # for f(x) = x**2 + x + 1
     learning_rate = 0.01
 
@@ -32,3 +35,22 @@ def maximize_second_equation(guess, tolerance):
 # print(maximize_second_equation(-5, 1e-10))
 # print(maximize_second_equation(0, 1e-10))
 # print(maximize_second_equation(5, 1e-10))
+
+
+# could do either min or max, since the equation is f(x) = (sin(x))/(1+x**2)
+def minimize_third_equation(guess, tolerance):
+    learning_rate = 0.1
+    while True:
+        fx_prime = ((((math.cos(guess) * (1+guess**2)) -
+                    (math.sin(guess)*(2 * guess))) / ((1+guess**2)**2)))
+        # just switch from - to + to find the maximum (same abs value anyway)
+        new_guess = guess - learning_rate * fx_prime
+        if abs(fx_prime) < tolerance:
+            break
+        guess = new_guess
+    return new_guess
+
+
+print(minimize_third_equation(0, 1e-8))
+print(minimize_third_equation(0.5, 1e-8))
+print(minimize_third_equation(-0.5, 1e-8))
