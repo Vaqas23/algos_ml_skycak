@@ -7,6 +7,14 @@ def calc_min(arr):
     return min
 
 
+def calc_max(arr):
+    max = arr[0]
+    for i in range(1, len(arr)):
+        if arr[i] > max:
+            max = arr[i]
+    return max
+
+
 def selection_sort(arr):
     sorted_arr = []
     for i in range(len(arr)):
@@ -43,3 +51,37 @@ def insertion_sort(arr):
             else:
                 break
     return arr
+
+
+def counting_sort(arr):
+
+    # step 1
+    smallest = calc_min(arr)
+    for i in range(len(arr)):
+        arr[i] = arr[i] - smallest
+
+    # step 2
+    largest = calc_max(arr)
+    counts = [0] * (largest + 1)
+
+    # step 3
+    for num in arr:
+        counts[num] += 1
+
+    # step 4
+    sorted_arr = []
+    for i in range(len(counts)):
+        num = counts[i]
+        for j in range(num):
+            sorted_arr.append(i)
+
+    # step 5
+    for i in range(len(sorted_arr)):
+        sorted_arr[i] = sorted_arr[i] + smallest
+
+    return sorted_arr
+
+
+print(counting_sort([1, 2, 4, 3, 6, 5, 0]))
+print(counting_sort([7, 8, 9, 1, 2, 3, 4, 6]))
+print(counting_sort([-1, -3, -5, 9, 8, 2]))
