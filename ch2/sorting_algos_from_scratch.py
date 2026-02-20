@@ -17,7 +17,7 @@ def selection_sort(arr):
 
 
 def bubble_sort(arr):
-    while True:  # if swap happens, swap = True, else swap = False, break
+    while True:
         swap = False
         for i in range(1, len(arr)):
             if arr[i] < arr[i-1]:
@@ -28,4 +28,18 @@ def bubble_sort(arr):
                 swap = True
         if swap == False:
             break
+    return arr
+
+
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        while i > 0:
+            if arr[i] < arr[i-1]:
+                smaller = arr[i]
+                bigger = arr[i-1]
+                arr[i-1] = smaller
+                arr[i] = bigger
+                i -= 1
+            else:
+                break
     return arr
