@@ -5,3 +5,12 @@ def calc_min(arr):
         if arr[i] < min:
             min = arr[i]
     return min
+
+
+def selection_sort(arr):
+    sorted_arr = []
+    for i in range(len(arr)):
+        min_value = calc_min(arr)
+        sorted_arr.append(min_value)
+        arr.remove(min_value)
+    return sorted_arr
