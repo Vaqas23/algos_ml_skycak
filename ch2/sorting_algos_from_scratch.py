@@ -84,4 +84,4 @@ def counting_sort(arr):
 
 # Example of when counting sort would be impractical. Array contains a count of every number
 # from smallest to largest (-10000 to 1000 in this case)
-print(counting_sort([1, 2, 4, 3, 6, 5, 0, 1000, -10000, 30]))
+# print(counting_sort([1, 2, 4, 3, 6, 5, 0, 1000, -10000, 30]))
