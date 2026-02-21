@@ -1,18 +1,15 @@
 def merge(arr1, arr2):
     sorted_arr = []
-    while len(arr1) != 0 and len(arr2) != 0:
-        if arr1[0] > arr2[0]:
-            sorted_arr.append(arr2[0])
-            arr2.remove(arr2[0])
+    i, j = 0, 0
+    while i < len(arr1) and j < len(arr2):
+        if arr1[i] > arr2[j]:
+            sorted_arr.append(arr2[j])
+            j += 1
         else:
-            sorted_arr.append(arr1[0])
-            arr1.remove(arr1[0])
-    if len(arr1) == 0:
-        for num in arr2:
-            sorted_arr.append(num)
-    else:
-        for num in arr1:
-            sorted_arr.append(num)
+            sorted_arr.append(arr1[i])
+            i += 1
+    sorted_arr.extend(arr1[i:])
+    sorted_arr.extend(arr2[j:])
     return sorted_arr
 
 
