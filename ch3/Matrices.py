@@ -22,15 +22,30 @@ class Matrix:
     def transpose(self):
         pass
 
-    def add(self):
-        pass
+    def add(self, other_arr):
 
-    def subtract(self):
-        pass
+        if self.num_row != other_arr.num_row or self.num_col != other_arr.num_col:
+            raise TypeError(
+                "You cannot add/subtract matrices of differing dimensions.")
 
-    def scalar_multiply(self):
-        pass
+        for i in range(len(self.matrix)):
+            for j in range(len(self.matrix[i])):
+                self.matrix[i][j] += other_arr.matrix[i][j]
+        return self
+
+    def subtract(self, other_arr):
+
+        self.add(other_arr.scalar_multiply(-1))
+        return self
+
+    def scalar_multiply(self, scalar):
+
+        for i in range(len(self.matrix)):
+            for j in range(len(self.matrix[i])):
+                self.matrix[i][j] *= scalar
+        return self
 
 
-matrix = Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-matrix.show()
+matrix1 = Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+matrix2 = Matrix([[1, 1, 1], [1, 1, 1], [1, 1, 1]])
+matrix1.subtract(matrix2).show()
