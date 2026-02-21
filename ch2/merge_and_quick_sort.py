@@ -1,3 +1,6 @@
+import random
+
+
 def merge(arr1, arr2):
     sorted_arr = []
     i, j = 0, 0
@@ -25,4 +28,23 @@ def merge_sort(arr):
 
 
 def quick_sort(arr):
-    pass
+    if len(arr) <= 1:
+        return arr
+    else:
+        pivot = random.choice(arr)
+        less_than_pivot = []
+        more_than_pivot = []
+        pivots = []
+        for num in arr:
+            if num < pivot:
+                less_than_pivot.append(num)
+            elif num > pivot:
+                more_than_pivot.append(num)
+            else:
+                pivots.append(num)
+        less_sorted = quick_sort(less_than_pivot)
+        more_sorted = quick_sort(more_than_pivot)
+        return less_sorted + pivots + more_sorted
+
+
+print(quick_sort([1, 8, -9, 2, 3, 7, 8, 110, -200, 6, 2, 5]))
