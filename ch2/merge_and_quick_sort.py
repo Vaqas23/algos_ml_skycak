@@ -14,7 +14,14 @@ def merge(arr1, arr2):
 
 
 def merge_sort(arr):
-    pass
+    if len(arr) == 0 or len(arr) == 1:
+        return arr
+    else:
+        first_half = arr[0: len(arr)//2]
+        second_half = arr[len(arr)//2:]
+        merged_first_half = merge_sort(first_half)
+        merged_second_half = merge_sort(second_half)
+        return merge(merged_first_half, merged_second_half)
 
 
 def quick_sort(arr):
