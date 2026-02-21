@@ -20,7 +20,16 @@ class Matrix:
             print(f"{row}")
 
     def transpose(self):
-        pass
+        place_holder_matrix = []
+
+        for i in range(len(self.matrix[0])):
+            place_holder_row = []
+            for j in range(len(self.matrix)):
+                place_holder_row.append(self.matrix[j][i])
+            place_holder_matrix.append(place_holder_row)
+
+        self.matrix = place_holder_matrix
+        return self
 
     def add(self, other_arr):
 
@@ -46,6 +55,7 @@ class Matrix:
         return self
 
 
-matrix1 = Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+matrix1 = Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]])
 matrix2 = Matrix([[1, 1, 1], [1, 1, 1], [1, 1, 1]])
-matrix1.subtract(matrix2).show()
+
+matrix1.transpose().show()
