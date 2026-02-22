@@ -2,18 +2,14 @@ class Matrix:
 
     def __init__(self, arr):
         self.matrix = arr
-        self.num_row = 0
-        self.num_col = 0
 
         for i in range(len(arr)):
             if len(arr[0]) != len(arr[i]):
                 raise TypeError(
                     "Each row must have an equal number of columns")
 
-        for row in arr:
-            self.num_row += 1
-        for i in range(len(arr[0])):
-            self.num_col += 1
+        self.num_row = len(arr)
+        self.num_col = len(arr[0])
 
     def show(self):
         for row in self.matrix:
@@ -29,6 +25,7 @@ class Matrix:
             place_holder_matrix.append(place_holder_row)
 
         self.matrix = place_holder_matrix
+        self.num_row, self.num_col = self.num_col, self.num_row
         return self
 
     def add(self, other_arr):
@@ -55,20 +52,36 @@ class Matrix:
         return self
 
     def matrix_multiply(self, other_arr):
-        if len(self.matrix[0]) != len(other_arr):
+        if self.num_col != other_arr.num_row:
             raise TypeError(
                 "The number of columns in the first matrix must equal the number of rows in the second!")
         else:
-            other_arr_transpoed = other_arr.transpose()
+            other_arr.transpose()
+            resultant_matrix = []
             for i in range(self.num_row):
-                for i in range(len(other_arr.matrix.num_col)):
+                row_matrix = []
+                for j in range(other_arr.num_col):
+                    row_matrix.append(dot_product(
+                        self.matrix[i], other_arr.matrix[j]))
+                resultant_matrix.append(row_matrix)
+
+            other_arr.transpose()
+
+            self.matrix = resultant_matrix
+            return self
 
 
 def dot_product(arr1, arr2):
     if len(arr1) != len(arr2):
         raise TypeError("Vectors must be of equal length/dimension")
     else:
-        dot_product = 0
+        dot_product_num = 0
         for i in range(len(arr1)):
-            dot_product += arr1[i]*arr2[i]
-        return dot_product
+            dot_product_num += arr1[i]*arr2[i]
+        return dot_product_num
+
+
+Matrix1 = Matrix([[1, 2, 3], [1, 2, 3]])
+Matrix2 = Matrix([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
+
+Matrix1.matrix_multiply(Matrix2).show()
