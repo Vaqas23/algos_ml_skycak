@@ -55,7 +55,11 @@ class Matrix:
         return self
 
 
-matrix1 = Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]])
-matrix2 = Matrix([[1, 1, 1], [1, 1, 1], [1, 1, 1]])
-
-matrix1.transpose().show()
+def dot_product(arr1, arr2):
+    if len(arr1) != len(arr2):
+        raise TypeError("Vectors must be of equal length/dimension")
+    else:
+        dot_product = 0
+        for i in range(len(arr1)):
+            dot_product += arr1[i]*arr2[i]
+        return dot_product
