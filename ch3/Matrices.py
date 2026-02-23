@@ -106,7 +106,10 @@ def calculate_determinant(matrix):
 
     determinant = 0
     for i in range(len(matrix[0])):
-        sub_matrix = remove_row_and_column(matrix, 0, i)
         determinant += (-1)**i * matrix[0][i] * \
-            calculate_determinant(sub_matrix)
+            calculate_determinant(remove_row_and_column(matrix, 0, i))
     return determinant
+
+
+matrix = Matrix([[1,1],[1,1]])
+print(matrix.recursive_determinant())
