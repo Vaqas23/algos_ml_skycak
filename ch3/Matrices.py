@@ -92,7 +92,7 @@ def dot_product(arr1, arr2):
 def remove_row_and_column(matrix, row, column):
     new_matrix = []
     for r in matrix:
-        new_matrix.append(r[:])
+        new_matrix.append(r[:]) # must copy in new matrix or else it would just be a reference and pop() the original Matrix object
     new_matrix.pop(row)
     for row in new_matrix:
         row.pop(column)
