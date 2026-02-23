@@ -70,6 +70,13 @@ class Matrix:
             self.matrix = resultant_matrix
             return self
 
+    def recursive_determinant(self):
+        if self.num_col != self.num_row:
+            raise TypeError(
+                "Rows and Columns must be equal to take the determinant")
+        else:
+            return calculate_determinant(self.matrix)
+
 
 def dot_product(arr1, arr2):
     if len(arr1) != len(arr2):
@@ -81,7 +88,25 @@ def dot_product(arr1, arr2):
         return dot_product_num
 
 
-Matrix1 = Matrix([[1, 2, 3], [1, 2, 3]])
-Matrix2 = Matrix([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
+# Helper function for calculate_determinant
+def remove_row_and_column(matrix, row, column):
+    new_matrix = []
+    for r in matrix:
+        new_matrix.append(r[:])
+    new_matrix.pop(row)
+    for row in new_matrix:
+        row.pop(column)
+    return new_matrix
 
-Matrix1.matrix_multiply(Matrix2).show()
+# Helper function for recursive_determinant that reduces overhead
+# Ensure we dont need to make many Matrix objects
+def calculate_determinant(matrix):
+    if len(matrix) == 1:
+        return matrix[0][0]
+
+    determinant = 0
+    for i in range(len(matrix[0])):
+        sub_matrix = remove_row_and_column(matrix, 0, i)
+        determinant += (-1)**i * matrix[0][i] * \
+            calculate_determinant(sub_matrix)
+    return determinant
