@@ -1,7 +1,6 @@
-# f(x,y) = (x-1)^2 + 3y^2
 import math
 
-
+# f(x,y) = (x-1)^2 + 3y^2
 def minimize_first_equation(guess_x, guess_y, precision):
     learning_rate = 0.01
     fx_prime = 2 * guess_x - 2
@@ -25,7 +24,6 @@ def minimize_first_equation(guess_x, guess_y, precision):
 
 
 # f(x,y) = y^2 + ycos(x)
-
 def minimize_second_equation(guess_x, guess_y, precision):
     learning_rate = 0.01
     fx_prime = -guess_y * math.sin(guess_x)
@@ -48,8 +46,6 @@ def minimize_second_equation(guess_x, guess_y, precision):
 # print(minimize_second_equation(3, 3, 1e-8))
 
 # f(x,y,z) = (x-1)^2 + 3(y-2)^2 + 4(z+1)^2
-
-
 def minimize_third_equation(guess_x, guess_y, guess_z, precision):
     learning_rate = 0.01
     fx_prime = 2 * (guess_x - 1)
