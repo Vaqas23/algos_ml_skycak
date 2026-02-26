@@ -3,7 +3,7 @@ class Matrix:
     def __init__(self, arr):
         self.matrix = arr
 
-        for i in range(len(arr)):
+        for i in range(1,len(arr)):
             if len(arr[0]) != len(arr[i]):
                 raise TypeError(
                     "Each row must have an equal number of columns")
@@ -76,6 +76,10 @@ class Matrix:
                 "Rows and Columns must be equal to take the determinant")
         else:
             return calculate_determinant(self.matrix)
+        
+    def reduced_row_echelon_form(self):
+        self.matrix = reduced_row_echelon_form(self.matrix)
+        return self
 
 
 def dot_product(arr1, arr2):
@@ -111,5 +115,43 @@ def calculate_determinant(matrix):
     return determinant
 
 
-matrix = Matrix([[1,1],[1,1]])
-print(matrix.recursive_determinant())
+def reduced_row_echelon_form(matrix):
+    row_index = 0
+
+    for column_index in range(len(matrix[0])): # looping through columns
+
+        pivot_row_index = pivot_exists(matrix,column_index)
+
+        if pivot_row_index != -1:
+
+            if pivot_row_index != column_index:
+
+                swap_rows(matrix, pivot_row_index, column_index) # column index is synonymous with the row index, since we want a diagnol of 1s
+    
+    return matrix
+
+# helper function for rref function
+def pivot_exists(matrix,column_index):
+    for i in range(len(matrix)):
+        if matrix[i][column_index] != 0:
+            return i #return index of the first row that isn't 0
+    return -1 #signifies false
+
+def swap_rows(matrix, row_index_1, row_index_2):
+    new_matrix = []
+    for row_index in range(len(matrix)):
+        if row_index == row_index_1:
+            new_matrix.append(matrix[row_index_2])
+        elif row_index == row_index_2:
+            new_matrix.append(matrix[row_index_1])
+        else:
+            new_matrix.append(matrix[row_index])
+    return new_matrix
+
+
+print(reduced_row_echelon_form([
+    [10,2,3,4],
+    [10,12,3,2],
+    [6,7,-1,3],
+    [20,-3,-4,2],
+]))
