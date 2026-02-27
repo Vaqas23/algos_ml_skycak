@@ -84,6 +84,9 @@ class Matrix:
     def inverse_matrix_via_rref(self):
         self.matrix = inverse_matrix_via_rref(self.matrix)
         return self
+    
+    def determinant_via_rref(self):
+        return determinant_via_rref(self.matrix)
 
 
 def dot_product(arr1, arr2):
@@ -118,7 +121,7 @@ def calculate_determinant(matrix):
             calculate_determinant(remove_row_and_column(matrix, 0, i))
     return determinant
 
-
+# ensures we don't need to make many Matrix objects
 def reduced_row_echelon_form(matrix):
     row_index = 0
 
@@ -187,20 +190,43 @@ def inverse_matrix_via_rref(matrix):
     
     return rref_matrix
 
-matrix = [
-    [1,2,3,4,5,6,7,8,9],
-    [2,3,4,5,6,7,8,9,1],
-    [3,4,5,6,7,8,9,1,2],
-    [4,5,6,7,8,9,1,2,3],
-    [5,6,7,8,9,1,2,3,4],
-    [6,7,8,9,1,2,3,4,5],
-    [7,8,9,1,2,3,4,5,6],
-    [8,9,1,2,3,4,5,6,7],
-    [9,1,2,3,4,5,6,7,8],
-]
 
-matrix = inverse_matrix_via_rref(matrix)
+# rref code + doing operations to reverse engineer determinant
+def determinant_via_rref(matrix):
 
-print(matrix)
+    new_matrix = []
+    for row in matrix:
+        new_matrix.append(row[:])
 
+    determinant = 1
+    row_index = 0
 
+    for column_index in range(len(matrix[0])): # looping through columns
+
+        pivot_row_index = pivot_exists(new_matrix,row_index, column_index)
+
+        if pivot_row_index != -1:
+
+            if pivot_row_index != row_index:
+                swap_rows(new_matrix, pivot_row_index, row_index)
+                determinant *= -1
+
+            pivot_number = new_matrix[row_index][column_index]
+            determinant *= pivot_number
+            for i in range(len(new_matrix[row_index])):
+                new_matrix[row_index][i] /= pivot_number
+            
+            for row in range(len(new_matrix)):
+                if row == row_index:
+                    continue
+                else:
+                    scalar = new_matrix[row][column_index]
+                    for i in range(len(new_matrix[row])):
+                        new_matrix[row][i] -= scalar * new_matrix[row_index][i]
+
+            row_index += 1
+        else:
+            # No pivot found in this column means a row of zeros -> determinant is 0
+            return 0
+    
+    return determinant 
