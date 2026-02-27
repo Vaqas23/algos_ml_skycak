@@ -80,6 +80,10 @@ class Matrix:
     def reduced_row_echelon_form(self):
         self.matrix = reduced_row_echelon_form(self.matrix)
         return self
+    
+    def inverse_matrix_via_rref(self):
+        self.matrix = inverse_matrix_via_rref(self.matrix)
+        return self
 
 
 def dot_product(arr1, arr2):
@@ -137,11 +141,11 @@ def reduced_row_echelon_form(matrix):
                 else:
                     scalar = matrix[row][column_index]
                     for i in range(len(matrix[row])):
-                        matrix[row][i] -= scalar * matrix[pivot_row_index][i]
+                        matrix[row][i] -= scalar * matrix[row_index][i]
 
             row_index += 1 
     
-    # Deals with the float point issue of -0.0
+    # Deals with the float point issue of -0.0. Visually more appealing. Removable for pure computation speed
     for i in range(len(matrix)):
         for j in range(len(matrix[i])):
             if matrix [i][j] == -0.0:
@@ -159,12 +163,44 @@ def pivot_exists(matrix,row_index, column_index):
 def swap_rows(matrix, row_index_1, row_index_2):
     matrix[row_index_1], matrix[row_index_2] = matrix[row_index_2], matrix[row_index_1] #tuple unpacking for ease
 
-matrix = Matrix([
-    [10,2,3,4],
-    [0,0,3,2,],
-    [0,0,-1,3],
-    [0,0,-4,2],
-    [0, 0, -9, 18]
-    ])
+def inverse_matrix_via_rref(matrix):
 
-matrix.reduced_row_echelon_form().show()
+    if calculate_determinant(matrix) == 0:
+        raise TypeError("This matrix is not invertible, its determinant is 0")
+    if len(matrix) != len(matrix[0]):
+        raise TypeError("This matrix is not invertible, it is not a square matrix")
+
+    # appending identity matrix
+    for row_index in range(len(matrix)):
+        for column_index in range(len(matrix[row_index])):
+            if row_index == column_index:
+                matrix[row_index].append(1)
+            else:
+                matrix[row_index].append(0)
+
+    # rref
+    rref_matrix = reduced_row_echelon_form(matrix)
+
+    # cut off left half (identity matrix)
+    for row_index in range(len(rref_matrix)):
+        rref_matrix[row_index] = rref_matrix[row_index][len(rref_matrix[row_index])//2:]
+    
+    return rref_matrix
+
+matrix = [
+    [1,2,3,4,5,6,7,8,9],
+    [2,3,4,5,6,7,8,9,1],
+    [3,4,5,6,7,8,9,1,2],
+    [4,5,6,7,8,9,1,2,3],
+    [5,6,7,8,9,1,2,3,4],
+    [6,7,8,9,1,2,3,4,5],
+    [7,8,9,1,2,3,4,5,6],
+    [8,9,1,2,3,4,5,6,7],
+    [9,1,2,3,4,5,6,7,8],
+]
+
+matrix = inverse_matrix_via_rref(matrix)
+
+print(matrix)
+
+
