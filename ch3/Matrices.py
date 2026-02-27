@@ -120,38 +120,51 @@ def reduced_row_echelon_form(matrix):
 
     for column_index in range(len(matrix[0])): # looping through columns
 
-        pivot_row_index = pivot_exists(matrix,column_index)
+        pivot_row_index = pivot_exists(matrix,row_index, column_index)
 
         if pivot_row_index != -1:
 
-            if pivot_row_index != column_index:
+            if pivot_row_index != row_index:
+                swap_rows(matrix, pivot_row_index, row_index)
 
-                swap_rows(matrix, pivot_row_index, column_index) # column index is synonymous with the row index, since we want a diagnol of 1s
+            pivot_number = matrix[row_index][column_index]
+            for i in range(len(matrix[row_index])):
+                matrix[row_index][i] /= pivot_number
+            
+            for row in range(len(matrix)):
+                if row == row_index:
+                    continue
+                else:
+                    scalar = matrix[row][column_index]
+                    for i in range(len(matrix[row])):
+                        matrix[row][i] -= scalar * matrix[pivot_row_index][i]
+
+            row_index += 1 
     
+    # Deals with the float point issue of -0.0
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            if matrix [i][j] == -0.0:
+                matrix[i][j] = 0.0
+
     return matrix
 
 # helper function for rref function
-def pivot_exists(matrix,column_index):
-    for i in range(len(matrix)):
+def pivot_exists(matrix,row_index, column_index):
+    for i in range(row_index, len(matrix)):
         if matrix[i][column_index] != 0:
             return i #return index of the first row that isn't 0
     return -1 #signifies false
 
 def swap_rows(matrix, row_index_1, row_index_2):
-    new_matrix = []
-    for row_index in range(len(matrix)):
-        if row_index == row_index_1:
-            new_matrix.append(matrix[row_index_2])
-        elif row_index == row_index_2:
-            new_matrix.append(matrix[row_index_1])
-        else:
-            new_matrix.append(matrix[row_index])
-    return new_matrix
+    matrix[row_index_1], matrix[row_index_2] = matrix[row_index_2], matrix[row_index_1] #tuple unpacking for ease
 
-
-print(reduced_row_echelon_form([
+matrix = Matrix([
     [10,2,3,4],
-    [10,12,3,2],
-    [6,7,-1,3],
-    [20,-3,-4,2],
-]))
+    [0,0,3,2,],
+    [0,0,-1,3],
+    [0,0,-4,2],
+    [0, 0, -9, 18]
+    ])
+
+matrix.reduced_row_echelon_form().show()
