@@ -43,76 +43,135 @@ for datapoint in data:
     num += 1
 
 
-# Now organize data into their respective clusters
+while True:
 
-cluster1 = []
-cluster2 = []
-cluster3 = []
+    previous_assignments = [points[0] for points in numbered_data]
 
-for datapoint in numbered_data:
-    if datapoint[0] == 1:
-        cluster1.append(datapoint)
-    elif datapoint[0] == 2:
-        cluster2.append(datapoint)
-    else:
-        cluster3.append(datapoint)
+    # Now organize data into their respective clusters
 
-# Now calculate centers
+    cluster1 = []
+    cluster2 = []
+    cluster3 = []
 
-cluster1_center = [0.0,0.0,0.0,0.0]
-cluster2_center = [0.0,0.0,0.0,0.0]
-cluster3_center = [0.0,0.0,0.0,0.0]
+    for datapoint in numbered_data:
+        if datapoint[0] == 1:
+            cluster1.append(datapoint)
+        elif datapoint[0] == 2:
+            cluster2.append(datapoint)
+        else:
+            cluster3.append(datapoint)
 
-# Cluster 1 
+    # Now calculate centers
 
-for datapoint in cluster1:
-    cluster1_center[0] += datapoint[0]
-    cluster1_center[1] += datapoint[1]
-    cluster1_center[2] += datapoint[2]
-    cluster1_center[3] += datapoint[3]
+    cluster1_center = [0.0,0.0,0.0,0.0]
+    cluster2_center = [0.0,0.0,0.0,0.0]
+    cluster3_center = [0.0,0.0,0.0,0.0]
 
-for i in range(4):
-    cluster1_center[i] = cluster1_center[i] / len(cluster1)
+    # Cluster 1 
 
-# Cluster 2
+    for datapoint in cluster1:
+        cluster1_center[0] += datapoint[1]
+        cluster1_center[1] += datapoint[2]
+        cluster1_center[2] += datapoint[3]
+        cluster1_center[3] += datapoint[4]
 
-for datapoint in cluster2:
-    cluster2_center[0] += datapoint[0]
-    cluster2_center[1] += datapoint[1]
-    cluster2_center[2] += datapoint[2]
-    cluster2_center[3] += datapoint[3]
+    for i in range(4):
+        cluster1_center[i] = cluster1_center[i] / len(cluster1)
 
-for i in range(4):
-    cluster2_center[i] = cluster2_center[i] / len(cluster2)
+    # Cluster 2
 
-# Cluster 3
+    for datapoint in cluster2:
+        cluster2_center[0] += datapoint[1]
+        cluster2_center[1] += datapoint[2]
+        cluster2_center[2] += datapoint[3]
+        cluster2_center[3] += datapoint[4]
 
-for datapoint in cluster3:
-    cluster3_center[0] += datapoint[0]
-    cluster3_center[1] += datapoint[1]
-    cluster3_center[2] += datapoint[2]
-    cluster3_center[3] += datapoint[3]
+    for i in range(4):
+        cluster2_center[i] = cluster2_center[i] / len(cluster2)
 
-for i in range(4):
-    cluster3_center[i] = cluster3_center[i] / len(cluster3)
+    # Cluster 3
 
-# Round each cluster center to 3 decimal points
+    for datapoint in cluster3:
+        cluster3_center[0] += datapoint[1]
+        cluster3_center[1] += datapoint[2]
+        cluster3_center[2] += datapoint[3]
+        cluster3_center[3] += datapoint[4]
 
-cluster1_center = [round(num, 3) for num in cluster1_center]
-cluster2_center = [round(num, 3) for num in cluster2_center]
-cluster3_center = [round(num, 3) for num in cluster3_center]
+    for i in range(4):
+        cluster3_center[i] = cluster3_center[i] / len(cluster3)
 
-for datapoint in numbered_data:
-    distance_to_cluster1 = math.sqrt((datapoint[1] - cluster1_center[0])**2 + (datapoint[2] - cluster1_center[1])**2 + (datapoint[3] - cluster1_center[2])**2 + (datapoint[4] - cluster1_center[3])**2)
-    distance_to_cluster2 = math.sqrt((datapoint[1] - cluster2_center[0])**2 + (datapoint[2] - cluster2_center[1])**2 + (datapoint[3] - cluster2_center[2])**2 + (datapoint[4] - cluster2_center[3])**2)
-    distance_to_cluster3 = math.sqrt((datapoint[1] - cluster3_center[0])**2 + (datapoint[2] - cluster3_center[1])**2 + (datapoint[3] - cluster3_center[2])**2 + (datapoint[4] - cluster3_center[3])**2)
-    distance = min(distance_to_cluster1,distance_to_cluster2,distance_to_cluster3)
-    if distance == distance_to_cluster1:
-        datapoint[0] = 1 # add to cluster 1
-    elif distance == distance_to_cluster2:
-        datapoint[0] = 2 # add to cluster 2
-    else:
-        datapoint[0] = 3 # add to cluster 3
+    # Round each cluster center to 3 decimal points
+
+    cluster1_center = [round(num, 3) for num in cluster1_center]
+    cluster2_center = [round(num, 3) for num in cluster2_center]
+    cluster3_center = [round(num, 3) for num in cluster3_center]
+
+    for datapoint in numbered_data:
+        distance_to_cluster1 = math.sqrt((datapoint[1] - cluster1_center[0])**2 + (datapoint[2] - cluster1_center[1])**2 + (datapoint[3] - cluster1_center[2])**2 + (datapoint[4] - cluster1_center[3])**2)
+        distance_to_cluster2 = math.sqrt((datapoint[1] - cluster2_center[0])**2 + (datapoint[2] - cluster2_center[1])**2 + (datapoint[3] - cluster2_center[2])**2 + (datapoint[4] - cluster2_center[3])**2)
+        distance_to_cluster3 = math.sqrt((datapoint[1] - cluster3_center[0])**2 + (datapoint[2] - cluster3_center[1])**2 + (datapoint[3] - cluster3_center[2])**2 + (datapoint[4] - cluster3_center[3])**2)
+        distance = min(distance_to_cluster1,distance_to_cluster2,distance_to_cluster3)
+        if distance == distance_to_cluster1:
+            datapoint[0] = 1 # add to cluster 1
+        elif distance == distance_to_cluster2:
+            datapoint[0] = 2 # add to cluster 2
+        else:
+            datapoint[0] = 3 # add to cluster 3
+
+    current_data = [point[0] for point in numbered_data]
+    if current_data == previous_assignments: #convergence
+        break 
 
 
-# repeat this process until the clusters don't change
+    # repeat this process until the clusters don't change (The while loop)
+
+# printing the 3 final clusters
+
+for data in numbered_data:
+    if data[0] == 1:
+        print(f"{data},")
+
+print('\n')
+
+for data in numbered_data:
+    if data[0] == 2:
+        print(f"{data},")
+
+print('\n')
+
+
+for data in numbered_data:
+    if data[0] == 3:
+        print(f"{data},")
+
+# [eggs, butter, sugar, flower]
+
+# final results
+
+cluster1 = [ 
+    [1, 0.14, 0.14, 0.28, 0.44],
+    [1, 0.1, 0.19, 0.25, 0.4],
+    [1, 0.14, 0.17, 0.31, 0.38],
+    [1, 0.1, 0.21, 0.28, 0.44],
+    [1, 0.11, 0.13, 0.28, 0.45],
+    [1, 0.12, 0.15, 0.33, 0.45],
+    [1, 0.15, 0.2, 0.3, 0.37],
+    [1, 0.2, 0.18, 0.3, 0.4],
+]
+
+cluster2 = [
+    [2, 0.02, 0.08, 0.43, 0.45],
+    [2, 0.05, 0.14, 0.35, 0.5],
+    [2, 0.04, 0.08, 0.35, 0.47],
+    [2, 0.0, 0.07, 0.34, 0.65],
+    [2, 0.0, 0.1, 0.4, 0.5],
+    [2, 0.0, 0.13, 0.4, 0.49],
+]
+
+cluster3 = [
+    [3, 0.22, 0.1, 0.45, 0.33],
+    [3, 0.16, 0.08, 0.35, 0.3],
+    [3, 0.2, 0.05, 0.4, 0.37],
+    [3, 0.25, 0.1, 0.3, 0.35],
+    [3, 0.22, 0.07, 0.4, 0.38],
+]
