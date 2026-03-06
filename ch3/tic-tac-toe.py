@@ -17,76 +17,111 @@ class Game:
         for row in self.board:
             print(row) # Im fine with a 3x3 matrix as the display.
 
-    def make_move(self, player, symbol, log):
-        """Helper method to handle a player's move and check if game is over"""
-        while True:
-            move = player.choose_move(self.board)
-            row, col = move
-            if self.board[row][col] != " ":
-                print("Illegal move! Try again.")
-                continue
-            self.board[row][col] = symbol
-            break
-        
-        if log:
-            self.display_board()
-            print()
-        
-        result = is_game_over(self.board)
-        if result == "X":
-            print("Game Over, Player 1 (X) Wins!")
-            return True
-        elif result == "O":
-            print("Game Over, Player 2 (O) Wins!")
-            return True
-        elif result is True:
-            print("Game Over, Draw!")
-            return True
-        return False
-
     def run(self, log = False):
-        if log:
-            self.display_board()
-            print()
         
         while True:
-            if self.make_move(self.player1, "X", log):
+
+            if log:
+                self.display_board()
+                print()
+            
+            player1_move = self.player1.choose_move(self.board)
+
+            # unpack array. check if move is legal. act accordingly
+
+            row, col = player1_move
+
+            if self.board[row][col] == "X" or self.board[row][col] == "O":
+                print("Illegal move!")
+            else:
+                self.board[row][col] = "X"
+
+            # check if game is over/who wins using helper func
+
+            if is_game_over(self.board) == "X":
+                print("Game Over, Player 1 (X) Wins!")
+                self.display_board()
                 break
-            if self.make_move(self.player2, "O", log):
+            elif is_game_over(self.board) == "O":
+                print("Game Over, Player 2 (O) Wins")
+                self.display_board()
+                break
+            elif is_game_over(self.board):
+                print("Game Over, Draw!")
+                self.display_board()
+                break
+
+            # ask player 2 for move
+
+            player2_move = self.player2.choose_move(self.board)
+
+            # unpack array. check if move is legal. act accordingly
+
+            row, col = player2_move
+
+            if self.board[row][col] == "X" or self.board[row][col] == "O":
+                print("Illegal move!")
+            else:
+                self.board[row][col] = "O"
+
+            # check if game is over/who wins using helper func
+
+            if is_game_over(self.board) == "X":
+                print("Game Over, Player 1 (X) Wins!")
+                self.display_board()
+                break
+            elif is_game_over(self.board) == "O":
+                print("Game Over, Player 2 (O) Wins")
+                self.display_board()
+                break
+            elif is_game_over(self.board):
+                print("Game Over, Draw!")
+                self.display_board()
                 break
         
 
-# returns False if not over, otherwise returns either X or O (whoever wins), or True for draw
+# returns False is not over, otherwise returns either X or O (however wins)
 def is_game_over(board): 
     
-    # All possible winning lines
-    winning_lines = [
-        # Rows
-        [board[0][0], board[0][1], board[0][2]],
-        [board[1][0], board[1][1], board[1][2]],
-        [board[2][0], board[2][1], board[2][2]],
-        # Columns
-        [board[0][0], board[1][0], board[2][0]],
-        [board[0][1], board[1][1], board[2][1]],
-        [board[0][2], board[1][2], board[2][2]],
-        # Diagonals
-        [board[0][0], board[1][1], board[2][2]],
-        [board[0][2], board[1][1], board[2][0]]
-    ]
-    
-    # Check if any line is three X's or three O's
-    for line in winning_lines:
-        if line == ['X', 'X', 'X']:
+    # check rows
+
+    for row in board:
+        if row == ['X','X','X']:
             return "X"
-        elif line == ['O', 'O', 'O']:
+        elif row == ['O','O','O']:
             return "O"
     
-    # Check if there is at least 1 empty spot. If so, game is not over
-    for row in board:
-        if " " in row:
-            return False
+    # check columns
+
+    for col_index in range(3):
+        current_column = []
+        for row in board:
+            current_column.append(row[col_index])
+        if current_column == ['X','X','X']:
+            return "X"
+        elif current_column == ['O','O','O']:
+            return "O"
+    
+    # check diagnols
+
+    if [board[0][0], board[1][1], board[2][2]] == ['X','X','X']:
+        return "X"
+    elif [board[0][0], board[1][1], board[2][2]]  == ['O','O','O']:
+        return "O"
+    
+    if [board[0][2], board[1][1], board[2][0]] == ['X','X','X']:
+        return "X"
+    elif [board[0][2], board[1][1], board[2][0]]  == ['O','O','O']:
+        return "O"
+    
+    # check if there is alteast 1 empty spot. If so, game is not over
+    for row in range(3):
+        for col in range(3):
+            if board[row][col] == " ":
+                return False
     
     # No one has won and there are no empty spots left
+
     return True
 
 class RandomPlayer:
@@ -110,9 +145,3 @@ class RandomPlayer:
 
         return moves[choice_index] #return which coordinate should be updated
     
-
-player1 = RandomPlayer()
-player2 = RandomPlayer()
-game = Game(player1,player2)
-
-game.run(log = True)
