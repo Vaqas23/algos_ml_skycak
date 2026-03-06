@@ -18,6 +18,12 @@ class Game:
             print(row) # Im fine with a 3x3 matrix as the display.
 
     def run(self, log = False):
+
+        if isinstance(self.player1, ManualPlayer):
+            print("You are X. Enter in 1-3 for row or col. You go first. \n")
+        
+        if isinstance(self.player2, ManualPlayer):
+            print("You are O. Enter in 1-3 for row or col. You go second. \n")
         
         while True:
 
@@ -25,7 +31,13 @@ class Game:
                 self.display_board()
                 print()
             
-            player1_move = self.player1.choose_move(self.board)
+            # ask for player 1 move
+
+            if isinstance(self.player1, RandomPlayer):
+                player1_move = self.player1.choose_move_random(self.board)
+            else: # manual player
+                player1_move = self.player1.choose_move_manual(self.board)
+    
 
             # unpack array. check if move is legal. act accordingly
 
@@ -53,7 +65,10 @@ class Game:
 
             # ask player 2 for move
 
-            player2_move = self.player2.choose_move(self.board)
+            if isinstance(self.player2, RandomPlayer):
+                player2_move = self.player2.choose_move_random(self.board)
+            else: # manual player
+                player2_move = self.player2.choose_move_manual(self.board)
 
             # unpack array. check if move is legal. act accordingly
 
@@ -128,7 +143,7 @@ class RandomPlayer:
 
     # init unnecessary
 
-    def choose_move(self, board):
+    def choose_move_random(self, board):
         
         moves = []
 
@@ -144,4 +159,33 @@ class RandomPlayer:
         choice_index = random.randint(0, len(moves)-1)
 
         return moves[choice_index] #return which coordinate should be updated
+
+class ManualPlayer:
+
+    # init unnecessary
+
+    def choose_move_manual(self,board):
+
+        
+        while True:
+            
+            for row in board:
+                print(row)
+            
+            row = int(input("row: "))
+            col = int(input("col: "))
+            print() # extra space
+
+            if row > 3 or row < 1 or col > 3 or col < 1:
+                print("Out of bounds, try again")
+            else:
+                break
+
+        return [row - 1, col - 1]
     
+
+player1 = RandomPlayer()
+player2 = ManualPlayer()
+
+game = Game(player1, player2)
+game.run(log = True)
