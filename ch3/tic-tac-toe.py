@@ -1,3 +1,5 @@
+import random
+
 class Game:
 
     def __init__(self, player1, player2):
@@ -24,8 +26,16 @@ class RandomPlayer:
 
     def choose_move(self, board):
         
-        move = [0,0]
+        moves = []
 
-        # decide
+        for row in range(3):
+            for column in range(3):
+                if board[row][column] == " ":
+                    moves.append([row,column])
+        
+        # moves now has all empty coordinates
 
-        return move #return which coordinate should be updated
+        # now randomly choose one of those empty coordinates 
+        choice_index = random.randint(0, len(moves)-1)
+
+        return moves[choice_index] #return which coordinate should be updated
