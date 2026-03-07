@@ -1,21 +1,27 @@
+# redo tic-tac-toe game but for connect-four
+
 import random
 
 class Game:
 
     def __init__(self, player1, player2):
-        
-        self.player1 = player1 # X
-        self.player2 = player2 # O
-        
+
+        self.player1 = player1
+        self.player2 = player2
+
         self.board = [
-            [" "," "," "],
-            [" "," "," "],
-            [" "," "," "]
+            [" "," ", " ", " ", " ", " ", " "],
+            [" "," ", " ", " ", " ", " ", " "],
+            [" "," ", " ", " ", " ", " ", " "],
+            [" "," ", " ", " ", " ", " ", " "],
+            [" "," ", " ", " ", " ", " ", " "],
+            [" "," ", " ", " ", " ", " ", " "],
         ]
-    
+
     def display_board(self):
+
         for row in self.board:
-            print(row) # Im fine with a 3x3 matrix as the display.
+            print(row)
 
     def run(self, log = False):
 
@@ -88,51 +94,9 @@ class Game:
                 print("Game Over, Draw!")
                 self.display_board()
                 break
-        
 
-# returns False is not over, otherwise returns either X or O (however wins)
-def is_game_over(board): 
-    
-    # check rows
-
-    for row in board:
-        if row == ['X','X','X']:
-            return "X"
-        elif row == ['O','O','O']:
-            return "O"
-    
-    # check columns
-
-    for col_index in range(3):
-        current_column = []
-        for row in board:
-            current_column.append(row[col_index])
-        if current_column == ['X','X','X']:
-            return "X"
-        elif current_column == ['O','O','O']:
-            return "O"
-    
-    # check diagnols
-
-    if [board[0][0], board[1][1], board[2][2]] == ['X','X','X']:
-        return "X"
-    elif [board[0][0], board[1][1], board[2][2]]  == ['O','O','O']:
-        return "O"
-    
-    if [board[0][2], board[1][1], board[2][0]] == ['X','X','X']:
-        return "X"
-    elif [board[0][2], board[1][1], board[2][0]]  == ['O','O','O']:
-        return "O"
-    
-    # check if there is alteast 1 empty spot. If so, game is not over
-    for row in range(3):
-        for col in range(3):
-            if board[row][col] == " ":
-                return False
-    
-    # No one has won and there are no empty spots left
-
-    return True
+def is_game_over(board):
+    pass
 
 class Player:
 
@@ -149,8 +113,8 @@ def random_strategy_function(board):
         moves = []
 
         # find all empty spots
-        for row in range(3):
-            for column in range(3):
+        for row in range(6):
+            for column in range(7):
                 if board[row][column] == " ":
                     moves.append([row,column])
         
@@ -172,36 +136,9 @@ def manual_strategy_function(board):
         col = int(input("col: "))
         print() # extra space
 
-        if row > 3 or row < 1 or col > 3 or col < 1:
+        if row > 6 or row < 1 or col > 7 or col < 1:
             print("Out of bounds, try again")
         else:
             break
 
     return [row - 1, col - 1]
-
-def cheater_strategy_function(board):
-    
-    # put our own pieces everywhere on the board
-    for i in range (3) :
-        for j in range (3) :
-            board [i][j] = "X" # adjust to be X or O depending on player. Could do this dynamically by giving symbol as parameter.
-    
-    # doesn ’t really matter what we return ;
-    # we ’ll arbitrarily move into top - left corner
-    return [0,0]
-
-def custom_strategy(board):
-
-    if board[1][1] == " ": #  centerpiece is strongest piece. 
-        return [1,1]
-    elif board[0][2] == " ": # just focus on one diagnol, usually works in random case.
-        return [0,2]
-    elif board[2][0] == " ":
-        return [2,0]
-    else:
-        return random_strategy_function(board)    
-
-player1 = Player ( random_strategy_function )
-player2 = Player ( custom_strategy )
-game = Game ( player1 , player2 )
-game.run(log = False)
