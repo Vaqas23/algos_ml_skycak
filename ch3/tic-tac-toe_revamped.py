@@ -184,7 +184,7 @@ def cheater_strategy_function(board):
     # put our own pieces everywhere on the board
     for i in range (3) :
         for j in range (3) :
-            board [i][j] = "X" # adjust to be X or O depending on player
+            board [i][j] = "X" # adjust to be X or O depending on player. Could do this dynamically by giving symbol as parameter.
     
     # doesn ’t really matter what we return ;
     # we ’ll arbitrarily move into top - left corner
