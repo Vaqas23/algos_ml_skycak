@@ -188,11 +188,20 @@ def cheater_strategy_function(board):
     
     # doesn ’t really matter what we return ;
     # we ’ll arbitrarily move into top - left corner
-    return (0 ,0)
+    return [0,0]
 
-    
+def custom_strategy(board):
+
+    if board[1][1] == " ": #  centerpiece is strongest piece. 
+        return [1,1]
+    elif board[0][2] == " ": # just focus on one diagnol, usually works in random case.
+        return [0,2]
+    elif board[2][0] == " ":
+        return [2,0]
+    else:
+        return random_strategy_function(board)    
 
 player1 = Player ( random_strategy_function )
-player2 = Player ( manual_strategy_function )
+player2 = Player ( custom_strategy )
 game = Game ( player1 , player2 )
-game.run(log = True)
+game.run(log = False)
