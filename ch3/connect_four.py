@@ -26,10 +26,10 @@ class Game:
     def run(self, log = False):
 
         if (self.player1.strategy_function == manual_strategy_function):
-            print("As player 1, you are X. Enter in 1-3 for row or col. You go first. \n")
+            print("As player 1, you are X. Enter in 1-7 for col. You go first. \n")
         
         if (self.player2.strategy_function == manual_strategy_function):
-            print("As player 2, you are O. Enter in 1-3 for row or col. You go second. \n")
+            print("As player 2, you are O. Enter in 1-7 or col. You go second. \n")
         
         while True:
 
