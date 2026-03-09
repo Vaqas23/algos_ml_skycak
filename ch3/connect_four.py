@@ -46,10 +46,14 @@ class Game:
             if self.board[0][player1_move_col] == "X" or self.board[0][player1_move_col] == "O":
                 print("Illegal move!")
             else:
-                for i in range(len(self.board)-1):
-                    if self.board[i+1][player1_move_col] == "X" or self.board[i+1][player1_move_col] == "O":
-                        self.board[i][player1_move_col] = "X"
-                        break
+                if self.board[5][player1_move_col] == " ":
+                    self.board[5][player1_move_col] = "X"
+                else:
+                    for i in range(len(self.board)-1):
+                        if self.board[i+1][player1_move_col] == "X" or self.board[i+1][player1_move_col] == "O":
+                            self.board[i][player1_move_col] = "X"
+                            break
+                
 
             # check if game is over/who wins using helper func
 
@@ -74,10 +78,13 @@ class Game:
             if self.board[0][player2_move_col] == "X" or self.board[0][player2_move_col] == "O":
                 print("Illegal move!")
             else:
-                for i in range(len(self.board)-1):
-                    if self.board[i+1][player2_move_col] == "X" or self.board[i+1][player2_move_col] == "O":
-                        self.board[i][player2_move_col] = "O"
-                        break
+                if self.board[5][player2_move_col] == " ":
+                    self.board[5][player2_move_col] = "O"
+                else:
+                    for i in range(len(self.board)-1):
+                        if self.board[i+1][player2_move_col] == "X" or self.board[i+1][player2_move_col] == "O":
+                            self.board[i][player2_move_col] = "O"
+                            break
 
             # check if game is over/who wins using helper func
 
