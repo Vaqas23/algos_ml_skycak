@@ -102,7 +102,51 @@ class Game:
                 break
 
 def is_game_over(board):
-    pass # figure this out + input only a column, current code allows for positioning anywhere.
+
+    # checking horizontally
+    for row in range(6):
+        for col in range(len(board[0])-3): # 4, 7-3
+            if board[row][col] == board[row][col+1] == board[row][col+2] == board[row][col+3] == "X":
+                return "X"
+            elif board[row][col] == board[row][col+1] == board[row][col+2] == board[row][col+3] == "O":
+                return "O"
+    
+    # checking vertially
+
+    for row in range(len(board)-3): # 3, 6-3
+        for col in range(7):
+             if board[row][col] == board[row+1][col] == board[row+2][col] == board[row+3][col] == "X":
+                return "X"
+             elif board[row][col] == board[row+1][col] == board[row+2][col] == board[row+3][col] == "O":
+                 return "O"
+             
+    # checking diagonally right
+
+    for row in range(len(board)-3):
+        for col in range(len(board[0])-3):
+             if board[row][col] == board[row+1][col+1] == board[row+2][col+2] == board[row+3][col+3] == "X":
+                return "X"
+             elif board[row][col] == board[row+1][col+1] == board[row+2][col+2] == board[row+3][col+3] == "O":
+                 return "O"
+
+    # checking diagonally left
+
+    for row in range(len(board)-3):
+        for col in range(len(board[0]), 3, -1):
+             if board[row][col] == board[row+1][col-1] == board[row+2][col-2] == board[row+3][col-3] == "X":
+                return "X"
+             elif board[row][col] == board[row+1][col-1] == board[row+2][col-2] == board[row+3][col-3] == "O":
+                 return "O"
+
+    # checking if all are filled
+
+    for row in board:
+        for point in row:
+            if point == " ":
+                return False # game not won, and space still available
+            
+    return True # since no one has one, and space is filled, it is a draw
+            
 
 class Player:
 
