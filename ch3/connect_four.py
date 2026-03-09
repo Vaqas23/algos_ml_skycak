@@ -46,7 +46,10 @@ class Game:
             if self.board[0][player1_move_col] == "X" or self.board[0][player1_move_col] == "O":
                 print("Illegal move!")
             else:
-                pass # figure out how to put on lowest row
+                for i in range(len(self.board)-1):
+                    if self.board[i+1][player1_move_col] == "X" or self.board[i+1][player1_move_col] == "O":
+                        self.board[i][player1_move_col] = "X"
+                        break
 
             # check if game is over/who wins using helper func
 
@@ -71,7 +74,10 @@ class Game:
             if self.board[0][player2_move_col] == "X" or self.board[0][player2_move_col] == "O":
                 print("Illegal move!")
             else:
-                pass # figure out how to put on lowest one
+                for i in range(len(self.board)-1):
+                    if self.board[i+1][player2_move_col] == "X" or self.board[i+1][player2_move_col] == "O":
+                        self.board[i][player2_move_col] = "O"
+                        break
 
             # check if game is over/who wins using helper func
 
