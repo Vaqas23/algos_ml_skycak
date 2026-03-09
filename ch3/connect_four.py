@@ -96,7 +96,7 @@ class Game:
                 break
 
 def is_game_over(board):
-    pass
+    pass # figure this out + input only a column, current code allows for positioning anywhere.
 
 class Player:
 
@@ -132,13 +132,12 @@ def manual_strategy_function(board):
         for row in board:
             print(row)
         
-        row = int(input("row: "))
         col = int(input("col: "))
         print() # extra space
 
-        if row > 6 or row < 1 or col > 7 or col < 1:
+        if col > 7 or col < 1:
             print("Out of bounds, try again")
         else:
             break
 
-    return [row - 1, col - 1]
+    return col - 1
