@@ -110,20 +110,17 @@ class Player:
 
 def random_strategy_function(board):
 
-        moves = []
+    moves = []
 
-        # find all empty spots
-        for row in range(6):
-            for column in range(7):
-                if board[row][column] == " ":
-                    moves.append([row,column])
-        
-        # moves now has all empty coordinates
+    # find all columns with atleast one empty spot
+    for column in range(7):
+            if board[0][column] == " ":
+                moves.append([column])
+    
+    # now randomly choose one of those empty coordinates 
+    choice_index = random.randint(0, len(moves)-1)
 
-        # now randomly choose one of those empty coordinates 
-        choice_index = random.randint(0, len(moves)-1)
-
-        return moves[choice_index] #return which coordinate should be updated
+    return moves[choice_index] # return col
 
 def manual_strategy_function(board):
     
