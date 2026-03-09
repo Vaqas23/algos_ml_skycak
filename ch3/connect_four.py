@@ -132,7 +132,7 @@ def is_game_over(board):
     # checking diagonally left
 
     for row in range(len(board)-3):
-        for col in range(len(board[0]), 3, -1):
+        for col in range(len(board[0])-1, 2, -1):  # start at col 3, needs room to go left
              if board[row][col] == board[row+1][col-1] == board[row+2][col-2] == board[row+3][col-3] == "X":
                 return "X"
              elif board[row][col] == board[row+1][col-1] == board[row+2][col-2] == board[row+3][col-3] == "O":
@@ -165,7 +165,7 @@ def random_strategy_function(board):
     # find all columns with atleast one empty spot
     for column in range(7):
             if board[0][column] == " ":
-                moves.append([column])
+                moves.append(column)
     
     # now randomly choose one of those empty coordinates 
     choice_index = random.randint(0, len(moves)-1)
@@ -188,3 +188,9 @@ def manual_strategy_function(board):
             break
 
     return col - 1
+
+player1 = Player(random_strategy_function)
+player2 = Player(manual_strategy_function)
+
+game = Game(player1,player2)
+game.run(log=True)
