@@ -40,17 +40,13 @@ class Game:
             # ask for player 1 move
 
             copy_board = [r[:] for r in self.board]  # makes sure cheater_function can't direct adjust board
-            player1_move = self.player1.choose_move(copy_board)
-    
+            player1_move_col = self.player1.choose_move(copy_board)
 
-            # unpack array. check if move is legal. act accordingly
 
-            row, col = player1_move
-
-            if self.board[row][col] == "X" or self.board[row][col] == "O":
+            if self.board[0][player1_move_col] == "X" or self.board[0][player1_move_col] == "O":
                 print("Illegal move!")
             else:
-                self.board[row][col] = "X"
+                pass # figure out how to put on lowest row
 
             # check if game is over/who wins using helper func
 
@@ -69,16 +65,13 @@ class Game:
 
             # ask player 2 for move
             copy_board = [r[:] for r in self.board] # makes sure cheater_function can't direct adjust board
-            player2_move = self.player2.choose_move(copy_board)
+            player2_move_col= self.player2.choose_move(copy_board)
 
-            # unpack array. check if move is legal. act accordingly
-            
-            row, col = player2_move
 
-            if self.board[row][col] == "X" or self.board[row][col] == "O":
+            if self.board[0][player2_move_col] == "X" or self.board[0][player2_move_col] == "O":
                 print("Illegal move!")
             else:
-                self.board[row][col] = "O"
+                pass # figure out how to put on lowest one
 
             # check if game is over/who wins using helper func
 
