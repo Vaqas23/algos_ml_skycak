@@ -55,3 +55,19 @@ plot2 = euler2.estimate_points(initial_point2,step_size,num_steps)
 plot3 = euler2.estimate_points(initial_point3,step_size,num_steps)
 plot4 = euler2.estimate_points(initial_point4,step_size,num_steps)
 plot5 = euler2.estimate_points(initial_point5,step_size,num_steps)
+
+import matplotlib.pyplot as plt
+
+plots = [plot1, plot2, plot3, plot4, plot5]
+
+for plot in plots:
+    x_values, y_values = zip(*plot)
+    plt.plot(x_values, y_values, marker='o', linestyle='-') # 'o' adds markers, '-' connects lines
+
+
+plt.xlabel('X-axis Label')
+plt.ylabel('Y-axis Label')
+plt.title('5 Euler Estimation Plots')
+plt.legend()  
+plt.grid(True) 
+plt.show()
