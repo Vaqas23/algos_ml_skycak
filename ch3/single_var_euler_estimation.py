@@ -2,7 +2,6 @@ class EulerEstimator:
 
     def __init__(self, derivative):
         self.derivative = derivative
-        self.points = []
     
     def estimate_points(self, initial_point, step_size, num_steps):
 
@@ -60,14 +59,14 @@ import matplotlib.pyplot as plt
 
 plots = [plot1, plot2, plot3, plot4, plot5]
 
-for plot in plots:
+for i, plot in enumerate(plots):
     x_values, y_values = zip(*plot)
-    plt.plot(x_values, y_values, marker='o', linestyle='-') # 'o' adds markers, '-' connects lines
+    plt.plot(x_values, y_values, marker='o', linestyle='-', label=f"plot {i}") # 'o' adds markers, '-' connects lines
 
 
-plt.xlabel('X-axis Label')
-plt.ylabel('Y-axis Label')
+plt.xlabel('x')
+plt.ylabel('f(x)')
 plt.title('5 Euler Estimation Plots')
-plt.legend()  
 plt.grid(True) 
+plt.legend()
 plt.show()
