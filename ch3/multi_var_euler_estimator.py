@@ -7,7 +7,15 @@ class EulerEstimator:
         pass
 
     def eval_derivative_at_point(self, inital_point):
-        pass
+        
+        t, state = inital_point
+        
+        dictionary = {}
+
+        for var, func in self.derivatives.items():
+            dictionary[var]= func(t, state)
+
+        return dictionary
 
 
 
