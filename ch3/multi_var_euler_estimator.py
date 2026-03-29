@@ -39,7 +39,7 @@ class EulerEstimator:
         return dictionary
 
 
-
+# Example
 
 def da_dt(t, state):
     return state['a'] + 1
