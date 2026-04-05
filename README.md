@@ -1,1 +1,1 @@
-Excersizes from Justin Skycak's "Introduction to Algorithims and Machine Learning"
+Exercises from Justin Skycak's "Introduction to Algorithims and Machine Learning"
