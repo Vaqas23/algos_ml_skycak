@@ -1,6 +1,5 @@
 import math
 
-precision = 1e-8
 
 # We are going to continously look until the derivative (gradRSS) = 0
 # or atleast as close as a computer can get to 0
@@ -9,6 +8,7 @@ data_1 = [(0.001, 0.01),(2, 4),(3, 9)] # func is y = ax**b
 
 guess_a = 1
 guess_b = 1
+precision = 1e-8
 
 def gradRSS_one(a,b,data):
     da = 0 
@@ -26,10 +26,8 @@ def grad_descent_func_one(guess_a,guess_b,precision, data):
 
     while abs(gradRSS_a) >= precision or abs(gradRSS_b) >= precision: # Could also do something like (new_a - old_a) < precision, this would check that the point is no longer changing meaningfully.
     
-        new_guess_a = guess_a - learning_rate * gradRSS_a
-        new_guess_b = guess_b - learning_rate * gradRSS_b
-        guess_a = new_guess_a
-        guess_b = new_guess_b
+        guess_a = guess_a - learning_rate * gradRSS_a
+        guess_b = guess_b - learning_rate * gradRSS_b
         gradRSS_a, gradRSS_b  = gradRSS_one(guess_a,guess_b,data)
     
     guess_a = round(guess_a, 3)
